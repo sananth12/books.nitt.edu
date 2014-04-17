@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Template · Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <script type="text/javascript">
+    function search()
+    {
+    s=document.getElementById("qry").value;
+    
+    URL="http://localhost:8983/solr/select?q=text:"+s+"&wt=json&indent=true"
+   // alert(URL)
+  /* $.ajax({
+  'url': URL,
+  'data': {'wt':'json', 'q':s},
+  success: function(data) { console.log(data) },
+  'dataType': 'jsonp',
+  'jsonp': 'json.wrf'
+});*/
+    $.getJSON(URL, function(result){
+    var Parent = document.getElementById('rs');
+    for (var i = 0; i < result.response.docs.length; i++) {
+      var thisResult = "<b>" + result.response.docs[i].name + "</b><br>" + result.response.docs[i].description
+      + ", " + result.response.docs[i].tags + "<br>";
+      var NewDiv = document.createElement("DIV");
+      NewDiv.innerHTML = thisResult;
+      Parent.appendChild(NewDiv);
+    }
+  });
+
+    }
+    </script>
+    <link href="js/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+
+      /* Custom container */
+      .container-narrow {
+        margin: 0 auto;
+        max-width: 700px;
+      }
+      .container-narrow > hr {
+        margin: 30px 0;
+      }
+
+      /* Main marketing message and sign up button */
+      .jumbotron {
+        margin: 60px 0;
+        text-align: center;
+      }
+      .jumbotron h1 {
+        font-size: 72px;
+        line-height: 1;
+      }
+      .jumbotron .btn {
+        font-size: 21px;
+        padding: 14px 24px;
+      }
+
+      /* Supporting marketing content */
+      .marketing {
+        margin: 60px 0;
+      }
+      .marketing p + h4 {
+        margin-top: 28px;
+      }
+    </style>
+    <link href="bootstrap-responsive.css" rel="stylesheet">
+
+   
+  <style type="text/css"></style></head>
+
+  <body>
+
+    <div class="container-narrow">
+
+      <hr>
+
+      <div class="jumbotron">
+        <h1>Book Search</h1>
+        <p class="lead">Enter the topic you are looking for</p>
+         <input type="text" id="qry" placeholder="Topic you are looking for">
+         <br />
+          <button class="btn btn-primary" type="button" onclick="search()">Search !</button>
+      </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+       <div id="rs"></div>
+      </div>
+
+      <hr>
+
+      <div class="footer">
+       
+      </div>
+
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="./js/jquery.js"></script>
+    <script src="./js/bootstrap-transition.js"></script>
+    <script src="./js/bootstrap-alert.js"></script>
+    <script src="./js/bootstrap-modal.js"></script>
+    <script src="./js/bootstrap-dropdown.js"></script>
+    <script src="./js/bootstrap-scrollspy.js"></script>
+    <script src="./js/bootstrap-tab.js"></script>
+    <script src="./js/bootstrap-tooltip.js"></script>
+    <script src="./js/bootstrap-popover.js"></script>
+    <script src="./js/bootstrap-button.js"></script>
+    <script src="./js/bootstrap-collapse.js"></script>
+    <script src="./js/bootstrap-carousel.js"></script>
+    <script src="./js/bootstrap-typeahead.js"></script>
+
+  
+
+</body></html>
